@@ -1,5 +1,5 @@
 {
-  "name": "daily-node",
+  "name": "@robindiddams/daily-node",
   "version": "0.0.2",
   "description": "Node.js client library for the daily.co platform.",
   "main": "lib/index.js",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sharkyze/daily-node.git"
+    "url": "git+https://github.com/robindiddams/daily-node.git"
   },
   "keywords": [
     "daily-co",
@@ -26,9 +26,9 @@
   "author": "samir elsharkawy",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sharkyze/daily-node/issues"
+    "url": "https://github.com/robindiddams/daily-node/issues"
   },
-  "homepage": "https://github.com/sharkyze/daily-node#readme",
+  "homepage": "https://github.com/robindiddams/daily-node#readme",
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "@types/node": "^10.17.19",
@@ -50,5 +50,8 @@
   },
   "dependencies": {
     "axios": "^0.19.2"
+  },
+  "directories": {
+    "lib": "lib"
   }
 }
