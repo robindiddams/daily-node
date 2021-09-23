@@ -282,8 +282,8 @@ export class Daily {
     return this.request({ method: "POST", url: "/meeting-tokens", data: req });
   }
 
-  // https://docs.daily.co/reference#validate-meeting-token
   // Validate a meeting token
+  // https://docs.daily.co/reference#validate-meeting-token
   public async meetingToken(token: string): Promise<MeetingToken> {
     return this.request({ method: "GET", url: `/meeting-tokens/${token}` });
   }
