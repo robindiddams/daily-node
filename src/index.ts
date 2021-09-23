@@ -133,6 +133,55 @@ export interface PaginatedResponse<T> {
   data: T[];
 }
 
+export interface MeetingsRequest extends PaginatedRequest {
+  // The optional room argument should be a room name, and limits results to
+  // that room.
+  room?: string;
+
+  // The optional timeframeStart argument is a unix timestamp, and limits
+  // results to meeting sessions that have a start time greater than or equal
+  // to timeframeStart.
+  timeframeStart?: number;
+
+  // The optional timeframeEnd argument is a unix timestamp, and limits results
+  // to meeting sessions that have a start time less than timeframeEnd.
+  timeframeEnd?: number;
+}
+
+export interface Meeting {
+  // A unique, opaque meeting session id.
+  id: string;
+
+  // The name of the room.
+  room: string;
+
+  // A start time (when the first user joined the session).
+  startTime: number;
+
+  // The duration of the meeting.
+  duration: number;
+
+  // An ongoing meeting (true, if any participants are currently in the room).
+  ongoing: boolean;
+
+  // A list of meeting session participants.
+  participants: Participant[];
+}
+
+export interface Participant {
+  // The unix timestamp when the user joined the meeting.
+  joinTime: number;
+
+  // The duration the user stayed in the meeting.
+  duration: number;
+
+  // The user's id for this meeting session.
+  userId?: string;
+
+  // The user's name in this meeting.
+  userName?: string;
+}
+
 export type Privacy = "public" | "org" | "private";
 
 export type Recording = "cloud" | "local";
@@ -282,9 +331,15 @@ export class Daily {
     return this.request({ method: "POST", url: "/meeting-tokens", data: req });
   }
 
-  // https://docs.daily.co/reference#validate-meeting-token
   // Validate a meeting token
+  // https://docs.daily.co/reference#validate-meeting-token
   public async meetingToken(token: string): Promise<MeetingToken> {
     return this.request({ method: "GET", url: `/meeting-tokens/${token}` });
+  }
+
+  // Get meeting sessions
+  // https://docs.daily.co/reference/rest-api/meetings/get-meeting-information
+  public async meetings(params?: MeetingsRequest): Promise<PaginatedResponse<Meeting>> {
+    return this.request({ method: "GET", url: "/meetings", params });
   }
 }
